@@ -59,10 +59,10 @@ const BusinessData = observer(() => {
     <>
 
       <Page />{AppStore.isLogin && <Edit />}
-
+  {!AppStore.isLogin && <ToLogin/>}  
       <Details2 />
       {!AppStore.isLogin && <ServicesList />}      {AppStore.isLogin && <MenuToAdmin />}
-      {!AppStore.isLogin && <ToLogin/>}  
+    
       {/* <Button
         type="primary"
         onClick={Admin}

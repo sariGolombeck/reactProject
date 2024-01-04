@@ -684,6 +684,7 @@ export default function GetAppointmentData() {
   const [app, setApp] = useState([]);
 
   useEffect(() => {
+   
     console.log(Appointments.appointments)
     setApp(Appointments.appointments);
   }, []);
@@ -710,8 +711,7 @@ export default function GetAppointmentData() {
         <Column field="clientName" header="Client Name" sortable style={{ width: '25%' }}></Column>
         <Column field="clientPhone" header="Client Phone" sortable style={{ width: '25%' }}></Column>
         <Column field="clientEmail" header="Client Email" sortable style={{ width: '25%' }}></Column> 
-         <Column field='serviceName.sn' header="Service Name" sortable style={{ width: '25%' }}></Column>
-
+         <Column field='serviceName' header="Service Name"  sortable style={{ width: '25%' }}></Column>
         <Column
           field="dateTime"
           header="Date/Time"

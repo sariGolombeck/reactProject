@@ -22,7 +22,6 @@ setIsNewAppointment:action,
       if (response.ok) {
         const data = await response.json();
         this.appointments = data;
-        console.log(this.appointments);
       } else {
         throw new Error('Unable to fetch Appointments');
       }
@@ -36,8 +35,8 @@ setIsNewAppointment:action,
 
   async setAppointments(newMeeting) {
     const response = await fetch("http://localhost:8787/appointment",
-
       {
+       
         method: "POST",
         headers: {
           "Content-Type": "application/json",

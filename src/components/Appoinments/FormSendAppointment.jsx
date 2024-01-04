@@ -160,7 +160,7 @@ const codeSnippetStyle = {
   color: !Appointments.isNewAppoinment ? 'red' : 'inherit',
 };
 
-const FormSendAppointment = ({ sn }) => {
+ const  FormSendAppointment  = ({ sn }) => {
   const [componentSize, setComponentSize] = useState('default');
   const [modalVisible, setModalVisible] = useState(true);
 
@@ -202,13 +202,13 @@ modalVisible
   const onSubmit = () => {
     if(formDetails[clientName]!=''){
 Appointments.setAppointments(formDetails);
-    if(  !Appointments.isNewAppoinment)
+    if(  Appointments.isNewAppoinment)
    {
      alert("appointment couldnt be saved, please change the datetime")
    }
    else{   
+    alert(" appointment added successfully ")
     Appointments.setIsNewAppointment(false); 
-  
     setModalVisible(false); 
    }
   }

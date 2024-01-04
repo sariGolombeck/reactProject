@@ -9,12 +9,14 @@ import Box from '@mui/material/Box';
 import AppStore from './store-mobx/AppStore';
 import ErrorAlert from './ErrorAlert';
 function Login() {
-  const [password, setPassword] = useState('123456');
-  const [userName, setUserName] = useState('admin');
+  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
 const [errorMassage,setErrorMassage]=useState('')
 const [boolError,setBoolError]=useState(false)
 
   const handleLoginAdmin = async () => {
+    setPassword('');
+  setUserName('');
     const response = await fetch("http://localhost:8787/login", {
       method: "POST",
       headers: {
@@ -24,6 +26,7 @@ const [boolError,setBoolError]=useState(false)
     });
 if(response.status===200)
 {
+  
 AppStore.setIsLogin(true);
 
 }

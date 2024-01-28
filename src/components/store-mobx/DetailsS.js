@@ -1,4 +1,6 @@
 import { observable, makeObservable, action } from 'mobx';
+import pic from '../../assets/images/questionMarkk.png'
+
 class DetailsStore {
     detailsEdit = {
         id: "123",
@@ -6,7 +8,7 @@ class DetailsStore {
         address: "where do you live?  ",
         phone: "0548509507",
         owner: "you!! ",
-        logo: "you logo bussiness",
+        logo: pic,
         description:"who are you??"
     };
     constructor() {

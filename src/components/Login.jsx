@@ -6,11 +6,11 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import AppStore from './store-mobx/AppStore';
+import AppStore from './store-mobx/Services';
 import ErrorAlert from './ErrorAlert';
 function Login() {
-  const [password, setPassword] = useState('');
-  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('123456');
+  const [userName, setUserName] = useState('admin');
 const [errorMassage,setErrorMassage]=useState('')
 const [boolError,setBoolError]=useState(false)
 
@@ -26,17 +26,19 @@ const [boolError,setBoolError]=useState(false)
     });
 if(response.status===200)
 {
-  
+ 
+  localStorage.setItem("isAdmin","true");
 AppStore.setIsLogin(true);
-
 }
-else if(response.status===401){
-  Swal.fire({
+else {
+  setInterval((x) => {
+      Swal.fire({
   icon: "error",
   title: "Oops...",
   text: "Something went wrong!",
   footer: '<a href="#">Why do I have this issue?</a>'
 });
+  }, 1000);
   // Swal.fire({
   //   icon: "error",
   //   title: "Oops...",

@@ -160,6 +160,9 @@
 // });
 
 // export default Details2;
+import '../../body.css'
+
+import scrollElement from 'react-scroll/modules/mixins/scroll-element';
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { EnvironmentOutlined, PhoneOutlined, UserOutlined, InfoCircleOutlined } from '@ant-design/icons';
@@ -176,7 +179,7 @@ const Details2 = observer((props) => {
   return (
     <div className="card-container">
       <div className="card">
-        <img src={DetailsS.detailsEdit.logo} id="logo" alt="Logo" />
+      <img id='logo' src={DetailsS.detailsEdit.logo}></img>
         <div className="card-content">
           <h2 className="details">{DetailsS.detailsEdit.name}</h2>
           <div className="details">

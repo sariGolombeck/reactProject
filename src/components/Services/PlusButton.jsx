@@ -7,8 +7,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
-import AppStore from '../store-mobx/AppStore';
-
+import AppStore from '../store-mobx/Services';
+import { useState } from 'react';
 const useStyles = makeStyles((theme) => ({
   www: {
     margin: '10vw',
@@ -30,13 +30,23 @@ export default function PlusButton() {
 
   const handleClose = () => {
     setOpen(false);
-    AppStore.setServiceList(inputValue);
+    console.log(serviceDetails)
+    AppStore.setServiceList(serviceDetails);
   };
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-    
+
+    setServiceDetails(() => ({
+      ...serviceDetails,
+      [event.target.name]: event.target.value
+    }),
+    );
   };
+  const [serviceDetails, setServiceDetails] = useState({
+    serviceName:"",
+    description:"",
+    price:"",
+})
 
   return (
     <React.Fragment>
@@ -62,11 +72,25 @@ Enter your new service here!
         onClose={handleClose}
         aria-labelledby="dialog-title"
       >
-        <DialogTitle id="dialog-title">Input Form</DialogTitle>
+        <DialogTitle id="dialog-title">Service</DialogTitle>
         <DialogContent>
           <TextField
-            label="Input"
-            value={inputValue}
+            label="Your service"
+            name="serviceName"
+            onChange={handleInputChange}
+            fullWidth
+            margin="normal"
+          />
+         < TextField
+            label="Description"
+            name="description"
+            onChange={handleInputChange}
+            fullWidth
+            margin="normal"
+          />
+            < TextField
+            label="Price"
+            name="price"
             onChange={handleInputChange}
             fullWidth
             margin="normal"

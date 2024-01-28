@@ -14,11 +14,12 @@
 // export default App;
 
 
+import './body.css'
 
 import './App.css'
 import Admin from './components/admin/Admin'
 import { Provider } from 'mobx-react';
-import AppStore from './components/store-mobx/AppStore';
+import AppStore from './components/store-mobx/Services';
 function App ()
 {
   return (

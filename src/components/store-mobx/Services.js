@@ -11,13 +11,14 @@ class AppStore {
 // // clientPhone:' ',
 // // clientEmail:' '
 // }
+isFirst=true;
   constructor() {
     makeObservable(this, {
       isLogin: observable,
       setIsLogin: action,
       serviceList: observable,
       setServiceList: action,
-      //Details:observable,
+      isFirst:observable,
     });
   }
 
@@ -36,9 +37,9 @@ class AppStore {
       },
       body: JSON.stringify({ name: newService }),
     });
-
     if (response.status === 200) {
       console.log("excellent");
+      isFirst=false;
     this.getServiceList();
     }
     if (response.status === 404) {

@@ -153,8 +153,9 @@
 // // // // });
 
 // // // // export default ServicesList;
+
 import React, { useState, useEffect } from "react";
-import AppStore from "../store-mobx/AppStore";
+import AppStore from "../store-mobx/Services";
 import { autorun } from 'mobx';
 import Service2 from "./PlusButton";
 // import AdminAppoinment from "../admin/AdminAppoinments";
@@ -172,6 +173,7 @@ const ServicesList = () => {
       console.log('Updated services:', AppStore.serviceList);
     });
   }, []);
+  
   return (
     <>
   {AppStore.isLogin&&<Service2/>}  
@@ -179,8 +181,8 @@ const ServicesList = () => {
      <div>{services.map((v, i) => (
       <div key={i}>
         <br />
-        <Cards title={v} price={500} description={"adsf"}/>
-        {/* {v} */}
+        <Cards serviceName={v.serviceName} price={v.price} description={v.description}/>
+       
       </div>
     ))}</div>
 ) : (

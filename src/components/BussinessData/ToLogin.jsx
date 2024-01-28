@@ -4,6 +4,7 @@ import { Outlet, Link } from "react-router-dom"
 import 'semantic-ui-css/semantic.min.css';
 
 export default class ToLogin extends Component {
+  
   state = { activeItem: 'home' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })

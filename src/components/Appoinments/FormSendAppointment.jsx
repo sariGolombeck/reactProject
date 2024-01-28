@@ -154,18 +154,19 @@
 // const [invitingDate, setInvitingDate] = useState('');
 import { Button, DatePicker, Form, Input, Modal, Radio, Select, Switch } from 'antd';
 import React, { useState } from 'react';
-import Appointments from '../store-mobx/Appointments';
+import Appointments from '../store-mobx/AppointmentsS';
 import SubmitBotton from '../SubmitButtom';
+import Swal from 'sweetalert2'
+
 const codeSnippetStyle = {
   color: !Appointments.isNewAppoinment ? 'red' : 'inherit',
 };
 
- const  FormSendAppointment  = ({ sn }) => {
+ const  FormSendAppointment  = ({ sn}) => {
   const [componentSize, setComponentSize] = useState('default');
   const [modalVisible, setModalVisible] = useState(true);
-
   const [formDetails, setFormDetails] = useState({
-    serviceName: { sn },
+    serviceName:sn,
     servicesDescription: '',
     servicePrice: 0,
     dateTime: null,
@@ -173,13 +174,17 @@ const codeSnippetStyle = {
     clientPhone: '',
     clientEmail: '',
   });
- 
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
   const handleDateChange = (date) => {
     const formattedDate = date ? date.format('YYYY-MM-DD HH:mm:ss') : null;
-    setFormDetails({ dateTime: formattedDate });
+    setFormDetails(() => ({
+      ...formDetails,
+      dateTime:formattedDate,
+      serviceName:sn
+    }),
+    );
   };
   const showModal = () => {
 modalVisible
@@ -200,21 +205,35 @@ modalVisible
   };
 
   const onSubmit = () => {
-    if(formDetails[clientName]!=''){
+     if (formDetails.clientName !== '' &&formDetails.dateTime!=null&& formDetails.clientEmail !== '' && formDetails.clientPhone !== '') {
+
 Appointments.setAppointments(formDetails);
-    if(  Appointments.isNewAppoinment)
-   {
-     alert("appointment couldnt be saved, please change the datetime")
-   }
-   else{   
-    alert(" appointment added successfully ")
-    Appointments.setIsNewAppointment(false); 
-    setModalVisible(false); 
-   }
-  }
-  else{
-    alert("enter all the field")
-  }
+if(Appointments.isWell)
+{
+  Swal.fire({
+    title: "Your appointment  determend!!",
+    icon: "success",
+  })   ,setModalVisible(false); 
+}
+else
+Swal.fire("change the date!");
+
+}
+const resetForm = () => {
+  setFormDetails({
+    serviceName: '',
+    servicesDescription: '',
+    servicePrice: 0,
+    dateTime: '',
+    clientName: '',
+    clientEmail: '',
+  });
+};
+
+ 
+   
+  
+
 }
   return (
     <>
@@ -252,17 +271,15 @@ Appointments.setAppointments(formDetails);
           <Form.Item value="clientEmail"  onChange={handleInputChange} label="Enter your email" name="clientEmail" rules={[{ type: 'email', message: 'Please enter a valid email' }]}>
             <Input />
           </Form.Item>
-          <Form.Item label="Phone Number" name="phone" rules={[{ required: true, message: 'Please enter your phone number' }]}>
+          <Form.Item label="Phone Number" name="clientPhone" rules={[{ required: true, message: 'Please enter your phone number' }]}>
             <Input onChange={handleInputChange} />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 4, span: 14 }}>
 
-            <Button htmlType="button" onClick={handleCancel} style={{ marginLeft: '10px' }}>
-              Cancel
-            </Button>
+    
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 4, span: 14 }}>
- <Form>
+
       <Form.Item
         label="Date and Time"
         style={codeSnippetStyle}
@@ -271,11 +288,13 @@ Appointments.setAppointments(formDetails);
       >
         <DatePicker showTime onChange={handleDateChange} />
       </Form.Item>
-    </Form>
             <Button type="primary" htmlType="submit" onClick={onSubmit} >
               Submit
             </Button>
-          </Form.Item>
+          </Form.Item> 
+                 <Button htmlType="button" onClick={handleCancel} style={{ marginLeft: '10px' }}>
+              Cancel
+            </Button>
         </Form>
       </Modal>,
 

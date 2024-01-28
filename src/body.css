@@ -1,0 +1,7 @@
+body {
+    overflow-y: scroll;
+  }
+  .page-container {
+    overflow-y: scroll; /* או auto */
+    height: 100vh; /* או גובה אחר שיתאים לך */
+  }

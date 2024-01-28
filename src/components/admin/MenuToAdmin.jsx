@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Input, Menu, Segment } from 'semantic-ui-react'
 import { Outlet, Link } from "react-router-dom"
 import 'semantic-ui-css/semantic.min.css';
+import '../../body.css';
 
 export default class MenuToAdmin extends Component {
   state = { activeItem: 'home' }
